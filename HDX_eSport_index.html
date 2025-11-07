@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HDX eSport</title>
+  <style>
+    /* === Theme variables (editable from Admin) === */
+    :root{
+      --bg:#0b0f14;
+      --card:#0f1620;
+      --accent:#00e6a8; /* neon mint */
+      --accent-2:#6a5cff; /* neon purple */
+      --muted:#9aa7b2;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --logo-font-size:28px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;padding:0;min-height:100%;background:linear-gradient(180deg,var(--bg) 0%, #081018 60%);color:#cfeff0;
+      -webkit-font-smoothing:antialiased;
+    }
+    .container{max-width:1100px;margin:40px auto;padding:28px;}
+    header{display:flex;align-items:center;gap:18px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-badge{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#041018;box-shadow:0 8px 30px rgba(106,92,255,0.12), inset 0 -6px 18px rgba(255,255,255,0.06)}
+    .site-title{font-size:var(--logo-font-size);margin:0;font-weight:800;letter-spacing:0.6px}
+    .site-tag{color:var(--muted);margin-top:4px}
+
+    nav{display:flex;gap:12px;margin-top:18px}
+    nav a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--accent)}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:var(--radius);box-shadow:0 12px 40px rgba(2,6,12,0.5)}
+
+    .banner{height:200px;border-radius:12px;overflow:hidden;position:relative;background-image:radial-gradient(circle at 10% 10%, rgba(106,92,255,0.08), transparent 5%), linear-gradient(120deg,#06131b 0%, #081018 40%);display:flex;align-items:center;padding:18px}
+    .neon{color:var(--accent);text-shadow:0 4px 24px rgba(0,230,168,0.18);font-family: 'Segoe UI', Roboto, Arial}
+    .info{line-height:1.5;color:var(--muted)}
+
+    /* Form styles */
+    form{display:grid;gap:12px}
+    label{font-size:13px;color:var(--muted)}
+    input[type=text], input[type=tel], select, textarea{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:10px;border-radius:8px;color:#e6fbf6;outline:none}
+    input:focus, textarea:focus, select:focus{border-color:rgba(0,230,168,0.45);box-shadow:0 6px 20px rgba(0,230,168,0.06)}
+    .row{display:flex;gap:12px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021018}
+    .btn-ghost{background:transparent;color:var(--muted)}
+
+    footer{margin-top:30px;color:var(--muted);font-size:13px;text-align:center}
+
+    .admin-panel{margin-top:12px}
+    .field-list{margin-top:8px}
+    .field-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    .chip{padding:6px 8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-weight:600}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .banner{height:160px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-badge">HDX</div>
+        <div>
+          <h1 class="site-title" id="site-title">HDX eSport</h1>
+          <div class="site-tag" id="site-tag">Neon • Competitive • Community</div>
+        </div>
+      </div>
+      <div style="margin-left:auto">
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#info">Info</a>
+          <a href="#register">Register</a>
+          <a href="#admin">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home" class="hero" style="margin-top:22px">
+      <div class="card">
+        <div class="banner">
+          <div>
+            <h2 class="neon" id="banner-title">Welcome to the Arena</h2>
+            <p class="info" id="banner-desc">Showcase tournaments, let players register, and keep submissions organized. Use the Admin panel to edit site content, form fields and theme live.</p>
+            <div style="margin-top:12px">
+              <button class="btn btn-primary" onclick="scrollToSection('register')">Register Now</button>
+              <button class="btn btn-ghost" onclick="scrollToSection('admin')">Open Admin</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:12px" class="info">
+          Tip: Use the Admin area to change the form schema, live-edit site text (title, rules) and export submissions as CSV.
+        </div>
+      </div>
+
+      <aside style="width:360px">
+        <div class="card">
+          <h3 style="margin-top:0">Latest Update</h3>
+          <p class="info" id="latest-update">No updates yet. Use Admin → Post Update to show messages here.</p>
+        </div>
+        <div style="height:16px"></div>
+        <div class="card">
+          <h4 style="margin-top:0">Quick Stats</h4>
+          <p class="info" id="stat-count">Submissions: 0</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="info" style="margin-top:22px">
+      <div class="card">
+        <h3 style="margin-top:0">Info & Rules</h3>
+        <p class="info" id="rules-text">Players must give accurate Player IDs and contact numbers. Follow tournament rules posted by Admin.</p>
+      </div>
+    </section>
+
+    <section id="register" style="margin-top:18px">
+      <div class="card">
+        <h3 style="margin-top:0">Player Registration</h3>
+        <div id="form-area"></div>
+        <div id="form-feedback" style="margin-top:10px;color:var(--accent);font-weight:700"></div>
+      </div>
+    </section>
+
+    <section id="admin" style="margin-top:18px">
+      <div class="card">
+        <h3 style="margin-top:0">Admin — Full Edit Mode</h3>
+        <p class="info">Enter admin password to unlock live editing: change site title, banner text, rules, theme colors, form fields, and manage submissions.</p>
+
+        <div class="admin-panel">
+          <button class="btn btn-primary" id="btn-open-admin">Open Admin Panel</button>
+          <div id="admin-area" style="display:none;margin-top:12px">
+
+            <h4>Site Content</h4>
+            <label>Site Title</label>
+            <input type="text" id="admin-site-title" />
+            <label>Site Tagline</label>
+            <input type="text" id="admin-site-tag" />
+            <label>Banner Title</label>
+            <input type="text" id="admin-banner-title" />
+            <label>Banner Description</label>
+            <textarea id="admin-banner-desc" rows="2" style="width:100%;border-radius:8px;padding:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);"></textarea>
+            <label>Rules/Info text</label>
+            <textarea id="admin-rules" rows="2" style="width:100%;border-radius:8px;padding:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);"></textarea>
+
+            <h4 style="margin-top:12px">Theme Presets</h4>
+            <p class="info">Pick a theme preset; Admin can also edit raw CSS vars below.</p>
+            <div style="display:flex;gap:8px;margin-top:6px">
+              <button class="btn" onclick="applyPreset(1)">Neon Glow</button>
+              <button class="btn" onclick="applyPreset(2)">Cyber Gradient</button>
+              <button class="btn" onclick="applyPreset(3)">Metallic</button>
+              <button class="btn" onclick="applyPreset(4)">Fire Glow</button>
+            </div>
+
+            <label style="margin-top:8px">Accent Color (hex)</label>
+            <input type="text" id="admin-accent" placeholder="#00e6a8" />
+            <label>Accent2 Color (hex)</label>
+            <input type="text" id="admin-accent2" placeholder="#6a5cff" />
+
+            <h4 style="margin-top:12px">Form Builder</h4>
+            <label>New Field Label</label>
+            <input type="text" id="new-field-label" placeholder="e.g. Player ID, Team Name" />
+            <label style="margin-top:6px">Type</label>
+            <select id="new-field-type">
+              <option value="text">Text</option>
+              <option value="tel">Phone</option>
+              <option value="textarea">Long text</option>
+              <option value="select">Select (comma separated options)</option>
+            </select>
+            <input type="text" id="new-field-options" placeholder="Options (only for select), comma separated" style="margin-top:6px" />
+            <div style="margin-top:8px">
+              <button class="btn btn-primary" id="btn-add-field">Add Field</button>
+              <button class="btn btn-ghost" id="btn-reset-schema">Reset to Default</button>
+            </div>
+
+            <div class="field-list" id="field-list"></div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-primary" id="btn-save-site">Save Site Changes</button>
+              <button class="btn btn-ghost" id="btn-export">Export CSV</button>
+              <button class="btn btn-ghost" id="btn-clear">Clear Submissions</button>
+              <button class="btn btn-ghost" id="btn-change-pass">Change Admin Password</button>
+            </div>
+
+            <div style="margin-top:12px">
+              <label>Set Admin Password</label>
+              <input type="text" id="admin-set-pass" placeholder="leave blank to keep current" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Built for you — edits are stored locally. Default admin password: <span class="chip">HDx owner</span>
+    </footer>
+  </div>
+
+  <script>
+    // Storage keys
+    const storageKeySchema = 'gaming_form_schema_v3';
+    const storageKeySub = 'gaming_submissions_v3';
+    const storageKeyUpdate = 'gaming_latest_update_v3';
+    const storageAdminPass = 'gaming_admin_pass_v3';
+    const storageSiteContent = 'gaming_site_content_v3';
+
+    function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+    // Default schema and content
+    const defaultSchema = [
+      {label:'Player ID', type:'text', name:'player_id'},
+      {label:'Player Name', type:'text', name:'player_name'},
+      {label:'Team Name', type:'text', name:'team_name'},
+      {label:'Game', type:'text', name:'game_name'},
+      {label:'Mobile Number', type:'tel', name:'mobile'}
+    ];
+
+    const defaultSite = {title:'HDX eSport', tag:'Neon • Competitive • Community', bannerTitle:'Welcome to the Arena', bannerDesc:'Showcase tournaments, let players register, and keep submissions organized. Use the Admin panel to edit site content, form fields and theme live.', rules:'Players must give accurate Player IDs and contact numbers. Follow tournament rules posted by Admin.'}
+
+    function getAdminPass(){return localStorage.getItem(storageAdminPass) || 'HDx owner'}
+
+    function loadSchema(){try{const s=localStorage.getItem(storageKeySchema);return s?JSON.parse(s):defaultSchema;}catch(e){return defaultSchema}}
+    function saveSchema(schema){localStorage.setItem(storageKeySchema, JSON.stringify(schema));}
+    function loadSubs(){try{const s=localStorage.getItem(storageKeySub); return s?JSON.parse(s):[]}catch(e){return []}}
+    function saveSubs(arr){localStorage.setItem(storageKeySub, JSON.stringify(arr));}
+    function loadSite(){try{const s=localStorage.getItem(storageSiteContent); return s?JSON.parse(s):defaultSite;}catch(e){return defaultSite}}
+    function saveSite(obj){localStorage.setItem(storageSiteContent, JSON.stringify(obj));}
+
+    // Render functions
+    function renderForm(){
+      const schema = loadSchema();
+      const area = document.getElementById('form-area'); area.innerHTML='';
+      const form = document.createElement('form'); form.id='player-form';
+      schema.forEach(field=>{
+        const wrap=document.createElement('div');
+        const label=document.createElement('label'); label.textContent=field.label; wrap.appendChild(label);
+        if(field.type==='textarea'){const ta=document.createElement('textarea'); ta.name=field.name; ta.rows=3; wrap.appendChild(ta);}
+        else if(field.type==='select'){const sel=document.createElement('select'); sel.name=field.name; const opts=(field.options||'').split(',').map(s=>s.trim()).filter(Boolean); opts.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;sel.appendChild(op)}); wrap.appendChild(sel);}
+        else {const inp=document.createElement('input'); inp.type=field.type||'text'; inp.name=field.name; wrap.appendChild(inp);}
+        form.appendChild(wrap);
+      });
+      const btn=document.createElement('button'); btn.type='submit'; btn.className='btn btn-primary'; btn.textContent='Submit Registration'; form.appendChild(btn);
+      form.addEventListener('submit', handleSubmit);
+      area.appendChild(form);
+    }
+
+    function handleSubmit(e){e.preventDefault(); const f=e.target; const data={}; for(const el of f.elements){ if(!el.name) continue; data[el.name]=el.value } data._ts=new Date().toISOString(); const arr=loadSubs(); arr.push(data); saveSubs(arr); document.getElementById('form-feedback').textContent='✅ Thank you — registration submitted!'; updateStats(); f.reset();}
+
+    function updateStats(){const c=loadSubs().length; document.getElementById('stat-count').textContent='Submissions: '+c;}
+
+    // Admin open
+    document.getElementById('btn-open-admin').addEventListener('click', ()=>{
+      const p = prompt('Enter admin password to open admin panel:'); if(p===getAdminPass()){document.getElementById('admin-area').style.display='block'; loadAdmin();} else alert('Wrong password.');
+    });
+
+    function loadAdmin(){
+      const site = loadSite();
+      document.getElementById('admin-site-title').value = site.title;
+      document.getElementById('admin-site-tag').value = site.tag;
+      document.getElementById('admin-banner-title').value = site.bannerTitle;
+      document.getElementById('admin-banner-desc').value = site.bannerDesc;
+      document.getElementById('admin-rules').value = site.rules;
+      document.getElementById('admin-accent').value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      document.getElementById('admin-accent2').value = getComputedStyle(document.documentElement).getPropertyValue('--accent-2').trim();
+      renderFieldList();
+    }
+
+    function renderFieldList(){const container=document.getElementById('field-list'); container.innerHTML=''; const schema=loadSchema(); schema.forEach((f,idx)=>{const row=document.createElement('div'); row.className='field-row'; const chip=document.createElement('div'); chip.className='chip'; chip.textContent=f.label+' ('+f.type+')'; const btnDel=document.createElement('button'); btnDel.className='btn btn-ghost'; btnDel.textContent='Remove'; btnDel.onclick=()=>{schema.splice(idx,1); saveSchema(schema); renderFieldList(); renderForm();}; row.appendChild(chip); row.appendChild(btnDel); container.appendChild(row);})}
+
+    document.getElementById('btn-add-field').addEventListener('click', ()=>{const label=document.getElementById('new-field-label').value.trim(); const type=document.getElementById('new-field-type').value; const opts=document.getElementById('new-field-options').value.trim(); if(!label){alert('Add a label for the field');return} const name=label.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,''); const schema=loadSchema(); schema.push({label,type,name,options:opts}); saveSchema(schema); renderFieldList(); renderForm(); document.getElementById('new-field-label').value=''; document.getElementById('new-field-options').value=''; });
+
+    document.getElementById('btn-reset-schema').addEventListener('click', ()=>{if(confirm('Reset to default form fields?')){ localStorage.removeItem(storageKeySchema); saveSchema(defaultSchema); renderFieldList(); renderForm(); }});
+
+    document.getElementById('btn-save-site').addEventListener('click', ()=>{
+      const site = {title:document.getElementById('admin-site-title').value.trim()||'HDX eSport', tag:document.getElementById('admin-site-tag').value.trim(), bannerTitle:document.getElementById('admin-banner-title').value.trim(), bannerDesc:document.getElementById('admin-banner-desc').value.trim(), rules:document.getElementById('admin-rules').value.trim()};
+      saveSite(site);
+      // apply live
+      document.getElementById('site-title').textContent = site.title; document.getElementById('site-tag').textContent = site.tag; document.getElementById('banner-title').textContent = site.bannerTitle; document.getElementById('banner-desc').textContent = site.bannerDesc; document.getElementById('rules-text').textContent = site.rules;
+      // colors
+      const a = document.getElementById('admin-accent').value.trim(); const a2 = document.getElementById('admin-accent2').value.trim(); if(a) document.documentElement.style.setProperty('--accent', a); if(a2) document.documentElement.style.setProperty('--accent-2', a2);
+      // admin password change
+      const newp = document.getElementById('admin-set-pass').value.trim(); if(newp){ localStorage.setItem(storageAdminPass, newp); alert('Admin password updated'); }
+      alert('Site changes saved locally. Players see updates immediately.');
+    });
+
+    document.getElementById('btn-export').addEventListener('click', ()=>{const arr=loadSubs(); if(arr.length===0){alert('No submissions to export');return} const headers=Object.keys(arr[0]); const csv=[headers.join(',')].concat(arr.map(r=>headers.map(h=>('\"'+String(r[h]||'').replace(/\"/g,'\"\"')+'\"')).join(','))); const csvStr=csv.join('\\n'); const blob=new Blob([csvStr],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='submissions.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);});
+
+    document.getElementById('btn-clear').addEventListener('click', ()=>{if(confirm('Clear all stored submissions? This cannot be undone.')){ localStorage.removeItem(storageKeySub); updateStats(); alert('Submissions cleared'); }});
+
+    document.getElementById('btn-change-pass').addEventListener('click', ()=>{const p = prompt('Enter new admin password:'); if(!p) return; localStorage.setItem(storageAdminPass, p); alert('Password updated');});
+
+    function applyPreset(n){
+      if(n===1){document.documentElement.style.setProperty('--accent','#00e6a8'); document.documentElement.style.setProperty('--accent-2','#6a5cff');}
+      if(n===2){document.documentElement.style.setProperty('--accent','#00c6ff'); document.documentElement.style.setProperty('--accent-2','#ff6ac1');}
+      if(n===3){document.documentElement.style.setProperty('--accent','#b8c6ff'); document.documentElement.style.setProperty('--accent-2','#7fb3ff');}
+      if(n===4){document.documentElement.style.setProperty('--accent','#ff6b35'); document.documentElement.style.setProperty('--accent-2','#ffb25c');}
+      document.getElementById('admin-accent').value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      document.getElementById('admin-accent2').value = getComputedStyle(document.documentElement).getPropertyValue('--accent-2').trim();
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', ()=>{
+      if(!localStorage.getItem(storageKeySchema)) saveSchema(defaultSchema);
+      // load site content
+      const site = loadSite(); document.getElementById('site-title').textContent = site.title; document.getElementById('site-tag').textContent = site.tag; document.getElementById('banner-title').textContent = site.bannerTitle; document.getElementById('banner-desc').textContent = site.bannerDesc; document.getElementById('rules-text').textContent = site.rules;
+      renderForm(); updateStats();
+      const upd = localStorage.getItem(storageKeyUpdate); if(upd) document.getElementById('latest-update').textContent = upd;
+    });
+  </script>
+</body>
+</html>
